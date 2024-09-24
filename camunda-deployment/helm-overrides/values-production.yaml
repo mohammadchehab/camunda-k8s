@@ -1,0 +1,66 @@
+# Camunda Zeebe configuration
+zeebe:
+  image:
+    repository: docker.io/camunda/zeebe
+    tag: 8.5.7
+  replicas: 3  # Increase Zeebe replicas for production
+  
+# Camunda Operate configuration
+operate:
+  enabled: true
+  image:
+    repository: docker.io/camunda/operate
+    tag: 8.5.6
+
+# Camunda Tasklist configuration
+tasklist:
+  enabled: true
+  image:
+    repository: docker.io/camunda/tasklist
+    tag: 8.5.7
+
+# Camunda Optimize configuration
+optimize:
+  enabled: true
+  image:
+    repository: docker.io/camunda/optimize
+    tag: 8.5.5
+
+# Camunda Identity configuration
+identity:
+  enabled: true
+  image:
+    repository: docker.io/camunda/identity
+    tag: 8.5.5
+
+# Camunda Connectors configuration
+connectors:
+  enabled: true
+  image:
+    repository: docker.io/camunda/connectors-bundle
+    tag: 8.5.7
+
+# Non-Camunda components
+elasticsearch:
+  image:
+    repository: docker.io/bitnami/elasticsearch
+    tag: 8.12.2
+  volumeClaimTemplate:
+    resources:
+      requests:
+        storage: 20Gi  # Customize storage for Elasticsearch
+
+postgresql:
+  image:
+    repository: docker.io/bitnami/postgresql
+    tag: 15.8.0
+  volumeClaimTemplate:
+    resources:
+      requests:
+        storage: 10Gi  # Customize storage for PostgreSQL
+
+keycloak:
+  enabled: true
+  image:
+    repository: docker.io/bitnami/keycloak
+    tag: 23.0.7
