@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: camunda
-  namespace: argocd
+  namespace: camunda
 spec:
   project: default
   source:
@@ -11,11 +11,13 @@ spec:
     targetRevision: 10.4.0 # Helm Chart version
     helm:
       valueFiles:
-        - ../values-production.yaml # Use custom values file
+        - https://raw.githubusercontent.com/mohammadchehab/camunda-k8s/refs/heads/main/camunda-deployment/argo-app/helm/values-production.yaml # Use custom values file
   destination:
     server: https://kubernetes.default.svc
     namespace: camunda
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
